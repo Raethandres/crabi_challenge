@@ -18,12 +18,12 @@ export class UserRepository {
 	async findByEmail(email: string): Promise<User | null> {
 		const db = this.client.db();
 		const user = await db.collection(this.collectionName).findOne({ email });
-		return user ? { ...user, id: user._id.toString() } : null;
+		return user?new User(user.firtsName,user.lastName,user.Email,user.password.user._id.toString()):null;
 	}
 	
 	async findById(id: string): Promise<User | null> {
 		const db = this.client.db();
 		const user = await db.collection(this.collectionName).findOne({ _id: new ObjectId(id) });
-		return user ? { ...user, id: user._id.toString() } : null;
+		return user?new User(user.firtsName,user.lastName,user.Email,user.password.user._id.toString()):null;
 	}
 }

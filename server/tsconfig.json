@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "incremental": true,
+    "esModuleInterop": true
+  }
+}

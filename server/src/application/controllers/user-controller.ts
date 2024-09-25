@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '../../core/domain/services/user-service';
+import {TypedRequest} from '../dtos/request.dto';
 
 export class UserController {
 	private userService: UserService;
@@ -8,9 +9,9 @@ export class UserController {
 		this.userService = userService;
 	}
 	
-	public async getUser(req: Request, res: Response): Promise<Response> {
+	public async getUser(req: TypedRequest<null>, res: Response): Promise<Response> {
 		try {
-			const userId = req.user.id; // Asume que el middleware de autenticación agrega el ID del usuario autenticado a la request.
+			const userId = req.user.id;
 			
 			const user = await this.userService.getUser(userId);
 			

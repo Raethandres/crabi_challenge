@@ -15,19 +15,21 @@ const userService:UserService=new UserService(userRepository);
 const authController=new AuthController(authService);
 const userController=new UserController(userService);
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(bodyParser.json());
-
-app.use('/api/auth', authRouter(authController));
-app.use('/api/users', userRouter(userController));
-
-app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).send('Something broke!');
-});
-
-app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
-});
+export default async():Promise<any>=>{
+	const app=express();
+	const PORT=process.env.PORT || 3000;
+	
+	app.use(bodyParser.json());
+	
+	app.use('/api/auth',authRouter(authController));
+	app.use('/api/users',userRouter(userController));
+	
+	app.use((err,req,res,next)=>{
+		console.error(err.stack);
+		res.status(500).send('Something broke!');
+	});
+	
+	app.listen(PORT,()=>{
+		console.log(`Server is running on http://localhost:${PORT}`);
+	});
+}

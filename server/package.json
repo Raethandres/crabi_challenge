@@ -1,0 +1,19 @@
+{
+  "name": "crabi_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raethandres/crabi_challenge.git"
+  },
+  "author": "andres colmenares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raethandres/crabi_challenge/issues"
+  },
+  "homepage": "https://github.com/Raethandres/crabi_challenge#readme"
+}

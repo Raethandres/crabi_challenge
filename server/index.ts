@@ -1,6 +1,8 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import api from './src/server';
+import {mongoMain} from './src/infrastructure/db/mongo';
+
 process.title='crabi';
 
 const date:Date=new Date();
@@ -12,7 +14,7 @@ const terminate=(signal:any):void=>{
 	process.exit(1);
 };
 
-api()
+api(mongoMain.client)
 
 
 process.on('SIGTERM',terminate);

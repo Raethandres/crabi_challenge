@@ -1,5 +1,5 @@
-// import * as dotenv from 'dotenv';
-// dotenv.config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 import api from './src/server';
 process.title='crabi';
 

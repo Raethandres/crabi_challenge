@@ -12,8 +12,8 @@ import {userRouter} from './core/domain/router/user-router';
 const userRepository:UserRepository=new UserRepository(mongoMain.client)
 const authService:AuthService=new AuthService(userRepository);
 const userService:UserService=new UserService(userRepository);
-const authController=new AuthController(authService);
-const userController=new UserController(userService);
+const authController:AuthController=new AuthController(authService);
+const userController:UserController=new UserController(userService);
 
 export default async():Promise<any>=>{
 	const app=express();

@@ -11,7 +11,7 @@ export class UtilitiesService{
 		}
 		
 		try {
-			const decoded: any =jwt.verify(token,process.env['JWT_KEY']);
+			const decoded: any =jwt.verify(token,process.env['JWT_SECRET']);
 			if (decoded) {
 				return decoded as UserJWT;
 			}

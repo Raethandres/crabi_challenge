@@ -1,0 +1,43 @@
+name: Run Tests and Merge to Main
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  run-tests-and-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run test-create-user
+        run: npm run test-create-user
+
+      - name: Run test-get-user
+        run: npm run test-get-user
+
+      - name: Run test-login-user
+        run: npm run test-login-user
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Merge to main
+        if: ${{ success() }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git merge test
+          git push origin main

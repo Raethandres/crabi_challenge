@@ -35,7 +35,17 @@ export class UserRepository {
 	
 	async findById(id: string): Promise<User | null> {
 		const db = this.client.db();
-		const user = await db.collection(this.collectionName).findOne({ _id: new ObjectId(id) });
-		return user?new User(user.firtsName,user.lastName,user.Email,user.password.user._id.toString()):null;
+		const _id:ObjectId= new ObjectId(id);
+		const user = await db.collection(this.collectionName).findOne({ _id });
+		if (user) {
+			return new User(
+				user.firstName,
+				user.lastName,
+				user.email,
+				user.password,
+				user._id.toString()
+			);
+		}
+		return null;
 	}
 }

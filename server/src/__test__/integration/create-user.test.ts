@@ -62,4 +62,23 @@ describe('POST /api/auth/signup', () => {
 		expect(response.body).toHaveProperty('error');
 	});
 	
+	it('should return 400 reported pld', async () => { //TODO mock pld api
+		const existingUser: CreateUserDTO = {
+			dni:'30254482577571',
+			firstName: 'Blair',
+			lastName: 'Bourthoumieux',
+			email: email,
+			password: 'anotherSecurePassword123'
+		};
+		
+		const response = await request(app)
+		.post('/api/auth/signup')
+		.send(existingUser)
+		.expect(400);
+		
+		expect(response.body).toHaveProperty('message');
+		expect(response.body.message).toBe('Error al registrar el usuario');
+		expect(response.body).toHaveProperty('error');
+	});
+	
 });

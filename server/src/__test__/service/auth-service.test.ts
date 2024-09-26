@@ -44,10 +44,8 @@ describe('AuthService', () => {
 				password: 'password123'
 			};
 			
-			// Simular que el usuario no existe
 			userRepository.findByEmail.mockResolvedValueOnce(null);
 			
-			// Mock del hash de bcrypt
 			(bcrypt.hash as jest.Mock).mockResolvedValueOnce('hashedPassword');
 			
 			const newUser: User = {
@@ -55,7 +53,6 @@ describe('AuthService', () => {
 				password: 'hashedPassword',
 			};
 			
-			// Simular que el usuario fue creado exitosamente
 			userRepository.create.mockResolvedValueOnce(newUser);
 			
 			const result = await authService.register(createUserDto);

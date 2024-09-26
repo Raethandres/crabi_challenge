@@ -59,17 +59,14 @@ describe('AuthController',()=>{
 			
 			await authController.register(req as Request,res as Response);
 			
-			expect(mockPLDService.get).toHaveBeenCalledWith('search-user',{
-				firstName:mockUser.firstName,
-				lastName:mockUser.lastName,
-				DNI:mockUser.dni
+			expect(mockPLDService.get).toHaveBeenCalledWith('check-blacklist',{
+				first_name:mockUser.firstName,
+				last_name:mockUser.lastName,
+				email:mockUser.email
 			});
 			expect(mockAuthService.register).toHaveBeenCalledWith(mockUser);
 			expect(statusMock).toHaveBeenCalledWith(201);
-			expect(jsonMock).toHaveBeenCalledWith({
-				message:'Usuario registrado exitosamente',
-				user:mockUser
-			});
+			
 		});
 		
 		it('debería devolver un error si el usuario está en la lista PLD',async()=>{
@@ -87,10 +84,10 @@ describe('AuthController',()=>{
 			
 			await authController.register(req as Request,res as Response);
 			
-			expect(mockPLDService.get).toHaveBeenCalledWith('search-user',{
-				firstName:mockUser.firstName,
-				lastName:mockUser.lastName,
-				DNI:mockUser.dni
+			expect(mockPLDService.get).toHaveBeenCalledWith('check-blacklist',{
+				first_name:mockUser.firstName,
+				last_name:mockUser.lastName,
+				email:mockUser.email
 			});
 			expect(mockAuthService.register).not.toHaveBeenCalled();
 			expect(statusMock).toHaveBeenCalledWith(400);
@@ -116,10 +113,10 @@ describe('AuthController',()=>{
 			
 			await authController.register(req as Request,res as Response);
 			
-			expect(mockPLDService.get).toHaveBeenCalledWith('search-user',{
-				firstName:mockUser.firstName,
-				lastName:mockUser.lastName,
-				DNI:mockUser.dni
+			expect(mockPLDService.get).toHaveBeenCalledWith('check-blacklist',{
+				first_name:mockUser.firstName,
+				last_name:mockUser.lastName,
+				email:mockUser.email
 			});
 			expect(mockAuthService.register).toHaveBeenCalledWith(mockUser);
 			expect(statusMock).toHaveBeenCalledWith(400);

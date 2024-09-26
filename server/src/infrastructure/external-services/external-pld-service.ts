@@ -10,7 +10,7 @@ export class PLDService {
 	async get<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
 		try {
 			const url = `${this.baseUrl}${endpoint}`;
-			const response: AxiosResponse<T> = await axios.get(url, { params });
+			const response: AxiosResponse<T> = await axios.post(url,  params);
 			
 			return response.data;
 		} catch (error) {

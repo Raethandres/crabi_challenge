@@ -8,12 +8,14 @@ import { UserService } from './core/domain/services/user-service';
 import { authRouter } from './core/domain/router/auth-router';
 import { userRouter } from './core/domain/router/user-router';
 import { MongoClient } from 'mongodb';
+import {PLDService} from './infrastructure/external-services/external-pld-service';
 
 export const createServer = async (client: MongoClient): Promise<express.Application> => {
 	const userRepository: UserRepository = new UserRepository(client);
 	const authService: AuthService = new AuthService(userRepository);
 	const userService: UserService = new UserService(userRepository);
-	const authController: AuthController = new AuthController(authService);
+	const pldService: PLDService = new PLDService(process.env['PLD_HOST']);
+	const authController: AuthController = new AuthController(authService,pldService);
 	const userController: UserController = new UserController(userService);
 	const app = express();
 	

@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-import api from './src/server';
+import {createServer} from './src/server';
 import {mongoMain} from './src/infrastructure/db/mongo';
 
 process.title='crabi';
@@ -14,7 +14,7 @@ const terminate=(signal:any):void=>{
 	process.exit(1);
 };
 
-api(mongoMain.client)
+createServer(mongoMain.client)
 
 
 process.on('SIGTERM',terminate);

@@ -25,6 +25,7 @@ describe('AuthService', () => {
 	describe('register', () => {
 		it('should throw an error if the user already exists', async () => {
 			const createUserDto: CreateUserDTO = {
+				dni:'123',
 				firstName:'',lastName:'',
 				email: 'existinguser@example.com',
 				password: 'password123'
@@ -37,6 +38,7 @@ describe('AuthService', () => {
 		
 		it('should hash the password and create a new user', async () => {
 			const createUserDto: CreateUserDTO = {
+				dni:'123',
 				firstName:'',lastName:'',
 				email: 'newuser@example.com',
 				password: 'password123'

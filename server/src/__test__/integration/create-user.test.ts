@@ -26,6 +26,7 @@ describe('POST /api/auth/signup', () => {
 	
 	it('should create a new user and return 201', async () => {
 		const newUser: CreateUserDTO = {
+			dni:'123',
 			firstName: 'test',
 			lastName: 'user',
 			email: email,
@@ -44,6 +45,7 @@ describe('POST /api/auth/signup', () => {
 	
 	it('should return 400 if email already exists', async () => {
 		const existingUser: CreateUserDTO = {
+			dni:'123',
 			firstName: 'duplicate',
 			lastName: 'user',
 			email: email,

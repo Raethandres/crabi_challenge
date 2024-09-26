@@ -13,9 +13,11 @@ services:
       JWT_SECRET: crabit
       PORT: 3000
       REDIS_URL: redis://redis:6379
+      PLD_HOST: http://localhost:3001/
     depends_on:
       - mongo
       - redis
+      - pld
     volumes:
       - .:/app/server
     command: [ "node", "dist/index.js" ]

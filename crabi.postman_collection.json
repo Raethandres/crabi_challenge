@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "45630ae1-4fb4-4550-a227-60b204789c34",
+		"name": "crabi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25206844"
+	},
+	"item": [
+		{
+			"name": "Crear un usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\n\t\t\t\"firstName\": \"jhon\",\n\t\t\t\"lastName\": \"doe\",\n\t\t\t\"email\": \"jhondoe@doe.com\",\n\t\t\t\"password\": \"securePassword123\"\n\t\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un usuario",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\n\t\t\t\"firstName\": \"jhon\",\n\t\t\t\"lastName\": \"doe\",\n\t\t\t\"email\": \"jhondoe@doe.com\",\n\t\t\t\"password\": \"securePassword123\"\n\t\t}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Usuario registrado exitosamente\",\n    \"user\": {\n        \"firstName\": \"jhon\",\n        \"lastName\": \"doe\",\n        \"email\": \"jhondoe1@doe.com\",\n        \"password\": \"$2b$10$bMXWYnqRyn7sTDMuIfYXY.L4hyKAZ52l./dt6hQsfSl9RP0DJ25Te\",\n        \"_id\": \"66f5c45a3a64a93041af45d2\",\n        \"id\": \"66f5c45a3a64a93041af45d2\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVjNDVhM2E2NGE5MzA0MWFmNDVkMiIsImVtYWlsIjoiamhvbmRvZTFAZG9lLmNvbSIsImlhdCI6MTcyNzM4MjYxOCwiZXhwIjoxNzI3Mzg2MjE4fQ.DeLhNCOnAa-RT11p-U6bgIyTGiok6GTvV1PNksVRWPo\"\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\t\"email\": \"jhondoe@doe.com\",\n\t\t\t\"password\": \"securePassword123\"\n\t\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\t\"email\": \"jhondoe@doe.com\",\n\t\t\t\"password\": \"securePassword123\"\n\t\t}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Login exitoso\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVjNDNjM2E2NGE5MzA0MWFmNDVkMSIsImVtYWlsIjoiamhvbmRvZUBkb2UuY29tIiwiaWF0IjoxNzI3MzgyNzM1LCJleHAiOjE3MjczODYzMzV9.OUgv7lpYN6l7dS3xcNPzCwneVamqhYtCxWU2aLURjVE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un usuario:",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVjNDNjM2E2NGE5MzA0MWFmNDVkMSIsImVtYWlsIjoiamhvbmRvZUBkb2UuY29tIiwiaWF0IjoxNzI3MzgyNzM1LCJleHAiOjE3MjczODYzMzV9.OUgv7lpYN6l7dS3xcNPzCwneVamqhYtCxWU2aLURjVE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un usuario:",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVjNDNjM2E2NGE5MzA0MWFmNDVkMSIsImVtYWlsIjoiamhvbmRvZUBkb2UuY29tIiwiaWF0IjoxNzI3MzgyNzM1LCJleHAiOjE3MjczODYzMzV9.OUgv7lpYN6l7dS3xcNPzCwneVamqhYtCxWU2aLURjVE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"me"
+							],
+							"query": [
+								{
+									"key": "access-token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVjNDNjM2E2NGE5MzA0MWFmNDVkMSIsImVtYWlsIjoiamhvbmRvZUBkb2UuY29tIiwiaWF0IjoxNzI3MzgyNzM1LCJleHAiOjE3MjczODYzMzV9.OUgv7lpYN6l7dS3xcNPzCwneVamqhYtCxWU2aLURjVE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Información del usuario\",\n    \"user\": {\n        \"firstName\": \"jhon\",\n        \"lastName\": \"doe\",\n        \"email\": \"jhondoe@doe.com\",\n        \"password\": \"$2b$10$3S5FQKbFe37oVrz.UthGRuDMipvdYaJ16e1aZocDvXpVwgmw3bweW\",\n        \"id\": \"66f5c43c3a64a93041af45d1\"\n    }\n}"
+				}
+			]
+		}
+	]
+}

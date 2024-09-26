@@ -1,0 +1,16 @@
+*.log
+*.env
+*.npm
+*.DS_Store
+*.editorconfig
+**/logs
+**/node_modules
+**/npm-debug.log
+**/dist
+**/documentation
+**/coverage
+schema.gql
+.idea
+.vscode
+.git
+.gitignore

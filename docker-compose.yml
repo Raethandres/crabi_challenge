@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crabit
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_MAIN_URL: mongodb://mongo:27017/crabit
+      JWT_SECRET: crabit
+      PORT: 3000
+      REDIS_URL: redis://redis:6379
+      PLD_HOST: http://98.81.235.22/
+      MONGO_TLS: false
+    depends_on:
+      - mongo
+      - redis
+#      - pld
+    volumes:
+      - .:/app/server
+    command: [ "node", "dist/index.js" ]
+#  pld:
+#    build:
+#      context: .
+#      dockerfile: DockerfilePLD
+#    container_name: PLD
+#    ports:
+#      - "3001:3001"
+#    environment:
+#      PORT: 3001
+#    volumes:
+#      - .:/app/pld
+#    command: [ "node", "index.js" ]
+
+  mongo:
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo_data:
+    driver: local

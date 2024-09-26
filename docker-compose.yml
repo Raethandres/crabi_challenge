@@ -12,11 +12,13 @@ services:
       MONGO_MAIN_URL: mongodb://mongo:27017/crabit
       JWT_SECRET: crabit
       PORT: 3000
+      REDIS_URL: redis://redis:6379
     depends_on:
       - mongo
+      - redis
     volumes:
       - .:/app/server
-    command: [ "node","dist/index.js" ]
+    command: [ "node", "dist/index.js" ]
 
   mongo:
     image: mongo:4.4
@@ -25,6 +27,12 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+
+  redis:
+    image: redis:alpine # Usamos la imagen de Redis
+    container_name: redis
+    ports:
+      - "6379:6379"
 
 volumes:
   mongo_data:

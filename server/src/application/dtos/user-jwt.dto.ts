@@ -1,6 +1,5 @@
 export class UserJWT{
 	id:string;
-	type:userType;
 }
 
 export class userType{

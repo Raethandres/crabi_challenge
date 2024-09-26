@@ -12,12 +12,12 @@ import {PLDService} from './infrastructure/external-services/external-pld-servic
 
 const PORT = process.env.PORT || 3000;
 
-export const createServer = async (client: MongoClient): Promise<express.Application> => {
+export const createServer = async (client: MongoClient,pldServiceMock:PLDService): Promise<express.Application> => {
 	const userRepository: UserRepository = new UserRepository(client);
 	const authService: AuthService = new AuthService(userRepository);
 	const userService: UserService = new UserService(userRepository);
 	const pldService: PLDService = new PLDService(process.env['PLD_HOST']);
-	const authController: AuthController = new AuthController(authService,pldService);
+	const authController: AuthController = new AuthController(authService,pldServiceMock||pldService);
 	const userController: UserController = new UserController(userService);
 	const app = express();
 	
@@ -31,9 +31,9 @@ export const createServer = async (client: MongoClient): Promise<express.Applica
 		res.status(500).send('Something broke!');
 	});
 	
-	app.listen(PORT, () => {
-		console.log(`Server is running on http://localhost:${PORT}`);
-	});
+	// app.listen(PORT, () => {
+	// 	console.log(`Server is running on http://localhost:${PORT}`);
+	// });
 	
 	return app;
 };

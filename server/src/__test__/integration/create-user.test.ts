@@ -4,14 +4,19 @@ import request from 'supertest';
 import { mongoMain } from '../../infrastructure/db/mongo';
 import { createServer } from '../../server';
 import { CreateUserDTO } from '../../application/dtos/create-user.dto';
+import {PLDService} from '../../infrastructure/external-services/external-pld-service';
 
+const mockPLDService={
+	get:jest.fn()
+};
 describe('POST /api/auth/signup', () => {
 	let app;
 	const email=`testuser${new Date().toString()}@example.com`
+	
 	beforeAll((done) => {
 		mongoMain.client.on('serverHeartbeatSucceeded', async():Promise<void>=>{
 			console.log('Connected to MongoDB');
-			app = await createServer(mongoMain.client);
+			app = await createServer(mongoMain.client,mockPLDService as unknown as PLDService);
 			done();
 		});
 		mongoMain.client.on('serverHeartbeatFailed', (err) => {
@@ -32,6 +37,7 @@ describe('POST /api/auth/signup', () => {
 			email: email,
 			password: 'securePassword123'
 		};
+		mockPLDService.get.mockResolvedValueOnce(false);
 		
 		const response = await request(app)
 		.post('/api/auth/signup')
@@ -51,6 +57,7 @@ describe('POST /api/auth/signup', () => {
 			email: email,
 			password: 'anotherSecurePassword123'
 		};
+		mockPLDService.get.mockResolvedValueOnce(false);
 		
 		const response = await request(app)
 		.post('/api/auth/signup')
@@ -62,7 +69,7 @@ describe('POST /api/auth/signup', () => {
 		expect(response.body).toHaveProperty('error');
 	});
 	
-	it('should return 400 reported pld', async () => { //TODO mock pld api
+	it('should return 400 reported pld', async () => {
 		const existingUser: CreateUserDTO = {
 			dni:'30254482577571',
 			firstName: 'Blair',
@@ -70,6 +77,7 @@ describe('POST /api/auth/signup', () => {
 			email: email,
 			password: 'anotherSecurePassword123'
 		};
+		mockPLDService.get.mockResolvedValueOnce(true);
 		
 		const response = await request(app)
 		.post('/api/auth/signup')

@@ -18,8 +18,20 @@ export class UserRepository {
 	async findByEmail(email: string): Promise<User | null> {
 		const db = this.client.db();
 		const user = await db.collection(this.collectionName).findOne({ email });
-		return user?new User(user.firtsName,user.lastName,user.Email,user.password.user._id.toString()):null;
+		
+		if (user) {
+			return new User(
+				user.firstName,
+				user.lastName,
+				user.email,
+				user.password,
+				user._id.toString()
+			);
+		}
+		
+		return null;
 	}
+	
 	
 	async findById(id: string): Promise<User | null> {
 		const db = this.client.db();

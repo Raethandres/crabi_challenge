@@ -3,41 +3,61 @@ dotenv.config();
 import request from 'supertest';
 import { mongoMain } from '../../infrastructure/db/mongo';
 import { createServer } from '../../server';
-import {CreateUserDTO} from '../../application/dtos/create-user.dto';  // Asegúrate de que el path esté correcto
+import { CreateUserDTO } from '../../application/dtos/create-user.dto';
 
-describe('POST /api/users', () => {
+describe('POST /api/auth/signup', () => {
 	let app;
+	const email=`testuser${new Date().toString()}@example.com`
 	beforeAll((done) => {
 		mongoMain.client.on('serverHeartbeatSucceeded', async():Promise<void>=>{
 			console.log('Connected to MongoDB');
-			app= await createServer(mongoMain.client);
+			app = await createServer(mongoMain.client);
 			done();
 		});
 		mongoMain.client.on('serverHeartbeatFailed', (err) => {
 			console.error('Failed to connect to MongoDB', err);
-			done(err); // Para que Jest falle si no se puede conectar
+			done(err);
 		});
 	});
-	
 	
 	afterAll(async () => {
 		await mongoMain.client.close();
 	});
 	
-	it('should create a new user and return 200', async () => {
-		const newUser:CreateUserDTO = {
-			firstName:'test',
-			lastName:'test',
-			email: 'testuser@example.com',
+	it('should create a new user and return 201', async () => {
+		const newUser: CreateUserDTO = {
+			firstName: 'test',
+			lastName: 'user',
+			email: email,
 			password: 'securePassword123'
 		};
 		
 		const response = await request(app)
 		.post('/api/auth/signup')
 		.send(newUser)
-		.expect(200);
+		.expect(201);
 		
-		expect(response.body).toHaveProperty('id');
-		expect(response.body.email).toBe(newUser.email);
+		expect(response.body).toHaveProperty('user');
+		expect(response.body.user).toHaveProperty('id');
+		expect(response.body.user.email).toBe(newUser.email);
 	});
+	
+	it('should return 400 if email already exists', async () => {
+		const existingUser: CreateUserDTO = {
+			firstName: 'duplicate',
+			lastName: 'user',
+			email: email,
+			password: 'anotherSecurePassword123'
+		};
+		
+		const response = await request(app)
+		.post('/api/auth/signup')
+		.send(existingUser)
+		.expect(400);
+		
+		expect(response.body).toHaveProperty('message');
+		expect(response.body.message).toBe('Error al registrar el usuario');
+		expect(response.body).toHaveProperty('error');
+	});
+	
 });

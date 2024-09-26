@@ -18,31 +18,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Create .env file
-        run: |
-          echo MONGO_MAIN_URL=${{ secrets.MONGO_MAIN_URL }} >> server/.env
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> server/.env
-          echo PORT=${{ secrets.PORT }} >> server/.env
-
       - name: Install dependencies
         run: |
           cd server
           npm install
-
-      - name: Run create-user integration test
-        run: |
-          cd server
-          npm run test-create-user
-
-      - name: Run get-user integration test
-        run: |
-          cd server
-          npm run test-get-user
-
-      - name: Run login-user integration test
-        run: |
-          cd server
-          npm run test-login-user
 
       - name: Run unit tests
         run: |

@@ -6,7 +6,7 @@ class MongoMain{
 	
 	constructor(){
 		this.mongoClientOptions={
-			tls:true,
+			tls:process.env['MONGO_TLS']=== "true",
 			monitorCommands:true
 		};
 		this.client=new MongoClient(process.env['MONGO_MAIN_URL'],this.mongoClientOptions);

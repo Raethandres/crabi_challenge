@@ -7,15 +7,23 @@ export class PLDService {
 		this.baseUrl = baseUrl;
 	}
 	
-	async get<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
+	async get<T>(endpoint: string, params?: Record<string, any>): Promise<boolean> {
+		const url = `${this.baseUrl}${endpoint}`;
+		
 		try {
-			const url = `${this.baseUrl}${endpoint}`;
-			const response: AxiosResponse<T> = await axios.post(url,  params);
-			
-			return response.data;
+			const response: AxiosResponse<T> = await axios.get(url, { params });
+			if (response.status === 200) {
+				return true;
+			}
+			if (response.status === 404) {
+				return false;
+			}
+			throw new Error(`Unexpected status code: ${response.status}`);
 		} catch (error) {
-			console.error(`Error during GET request to ${endpoint}:`, error);
-			throw new Error('API request failed');
+			if (error.status === 404) {
+				return false;
+			}
+			throw new Error(`API request failed: ${error.message}`);
 		}
 	}
 }

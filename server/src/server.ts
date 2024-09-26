@@ -10,9 +10,8 @@ import { userRouter } from './core/domain/router/user-router';
 import { MongoClient } from 'mongodb';
 import {PLDService} from './infrastructure/external-services/external-pld-service';
 
-const PORT = process.env.PORT || 3000;
 
-export const createServer = async (client: MongoClient,pldServiceMock:PLDService): Promise<express.Application> => {
+export const createServer = (client: MongoClient,pldServiceMock:PLDService): express.Application => {
 	const userRepository: UserRepository = new UserRepository(client);
 	const authService: AuthService = new AuthService(userRepository);
 	const userService: UserService = new UserService(userRepository);
@@ -30,10 +29,6 @@ export const createServer = async (client: MongoClient,pldServiceMock:PLDService
 		console.error(err.stack);
 		res.status(500).send('Something broke!');
 	});
-	
-	// app.listen(PORT, () => {
-	// 	console.log(`Server is running on http://localhost:${PORT}`);
-	// });
 	
 	return app;
 };

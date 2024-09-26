@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {UserRepository} from '../../core/ports/repositories/user-repository';
-import {AuthService} from '../../core/domain/services/auth-service';
-import {CreateUserDTO} from '../../application/dtos/create-user.dto';
-import {User} from '../../core/domain/models/user';
-import {LoginDTO} from '../../application/dtos/login.dto';
+import {UserRepository} from '../../../core/ports/repositories/user-repository';
+import {AuthService} from '../../../core/domain/services/auth-service';
+import {CreateUserDTO} from '../../../application/dtos/create-user.dto';
+import {User} from '../../../core/domain/models/user';
+import {LoginDTO} from '../../../application/dtos/login.dto';
 
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');

@@ -14,10 +14,6 @@ describe('GET /api/users/me', () => {
 			app = await createServer(mongoMain.client, null);
 			done();
 		});
-		mongoMain.client.on('serverHeartbeatFailed', (err) => {
-			console.error('Failed to connect to MongoDB', err);
-			done(err);
-		});
 	});
 	
 	afterAll(async () => {

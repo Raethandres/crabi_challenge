@@ -1,9 +1,9 @@
 import {Request,Response} from 'express';
-import {AuthService} from '../../core/domain/services/auth-service';
-import {PLDService} from '../../infrastructure/external-services/external-pld-service';
-import {AuthController} from '../../application/controllers/auth-controller';
-import {CreateUserDTO} from '../../application/dtos/create-user.dto';
-import {LoginDTO} from '../../application/dtos/login.dto';
+import {AuthController} from '../../../application/controllers/auth-controller';
+import {PLDService} from '../../../infrastructure/external-services/external-pld-service';
+import {AuthService} from '../../../core/domain/services/auth-service';
+import {CreateUserDTO} from '../../../application/dtos/create-user.dto';
+import {LoginDTO} from '../../../application/dtos/login.dto';
 
 const mockAuthService={
 	register:jest.fn(),

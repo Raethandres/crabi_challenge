@@ -1,6 +1,6 @@
-import {UserService} from '../../core/domain/services/user-service';
-import {UserRepository} from '../../core/ports/repositories/user-repository';
-import {User} from '../../core/domain/models/user';
+import {UserRepository} from '../../../core/ports/repositories/user-repository';
+import {UserService} from '../../../core/domain/services/user-service';
+import {User} from '../../../core/domain/models/user';
 
 describe('UserService', () => {
 	let userService: UserService;

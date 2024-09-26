@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test-create-user": "jest integration/create-user.test.ts",
+    "test-get-user": "jest integration/get-user.test.ts",
+    "test-login-user": "jest integration/login-user.test.ts",
+    "test": "jest unit ",
     "build": "tsc -p .",
     "run": "npm run build && cp .env ./dist/.env && node dist/index.js",
     "start": "ts-node index.ts"

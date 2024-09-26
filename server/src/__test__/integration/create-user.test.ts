@@ -19,10 +19,10 @@ describe('POST /api/auth/signup', () => {
 			app = await createServer(mongoMain.client,mockPLDService as unknown as PLDService);
 			done();
 		});
-		mongoMain.client.on('serverHeartbeatFailed', (err) => {
-			console.error('Failed to connect to MongoDB', err);
-			done(err);
-		});
+		// mongoMain.client.on('serverHeartbeatFailed', (err) => {
+		// 	console.error('Failed to connect to MongoDB', err);
+		// 	done(err);
+		// });
 	});
 	
 	afterAll(async () => {

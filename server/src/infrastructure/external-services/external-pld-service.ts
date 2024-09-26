@@ -7,18 +7,12 @@ export class PLDService {
 		this.baseUrl = baseUrl;
 	}
 	
-	async get<T>(endpoint: string, params?: Record<string, any>): Promise<boolean> {
+	async get(endpoint: string, params?: Record<string, any>): Promise<boolean> {
 		const url = `${this.baseUrl}${endpoint}`;
 		
 		try {
-			const response: AxiosResponse<T> = await axios.get(url, { params });
-			if (response.status === 200) {
-				return true;
-			}
-			if (response.status === 404) {
-				return false;
-			}
-			throw new Error(`Unexpected status code: ${response.status}`);
+			const response: AxiosResponse<any> = await axios.post(url, params);
+			return response.data.is_in_blacklist;
 		} catch (error) {
 			if (error.status === 404) {
 				return false;

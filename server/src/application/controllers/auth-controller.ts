@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { LoginDTO } from '../dtos/login.dto';
-import { CreateUserDTO } from '../dtos/create-user.dto';
+import {LoginDTO,validateLoginDTO} from '../dtos/login.dto';
+import {CreateUserDTO,validateCreateUserDTO} from '../dtos/create-user.dto';
 import { AuthService } from '../../core/domain/services/auth-service';
 import {PLDService} from '../../infrastructure/external-services/external-pld-service';
 
@@ -16,15 +16,15 @@ export class AuthController {
 	
 	public async register(req: Request, res: Response): Promise<Response> {
 		try {
-			const registerUserDto: CreateUserDTO = req.body;
+			const registerUserDto: CreateUserDTO = validateCreateUserDTO(req.body);
 			const pld= await this.pldService.get('search-user',{firstName:registerUserDto.firstName,lastName:registerUserDto.lastName,DNI:registerUserDto.dni});
 			if(pld)
 				throw new Error('PLD REPORTED');
-			const user = await this.authService.register(registerUserDto);
+			const data = await this.authService.register(registerUserDto);
 			
 			return res.status(201).json({
 				message: 'Usuario registrado exitosamente',
-				user,
+				...data
 			});
 		} catch (error) {
 			console.error(error.message);
@@ -37,7 +37,7 @@ export class AuthController {
 	
 	public async login(req: Request, res: Response): Promise<Response> {
 		try {
-			const loginDto: LoginDTO = req.body;
+			const loginDto: LoginDTO = validateLoginDTO(req.body);
 			const token = await this.authService.login(loginDto);
 			
 			return res.status(200).json({

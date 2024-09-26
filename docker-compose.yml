@@ -13,7 +13,7 @@ services:
       JWT_SECRET: crabit
       PORT: 3000
       REDIS_URL: redis://redis:6379
-      PLD_HOST: http://pld:3001/
+      PLD_HOST: http://98.81.235.22/check-blacklist/
       MONGO_TLS: false
     depends_on:
       - mongo

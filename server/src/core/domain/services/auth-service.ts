@@ -12,7 +12,7 @@ export class AuthService {
 		this.userRepository = userRepository;
 	}
 	
-	public async register(createUserDto: CreateUserDTO): Promise<User> {
+	public async register(createUserDto: CreateUserDTO): Promise<{user:User,token:string}> {
 		const { email, password } = createUserDto;
 		
 		const existingUser = await this.userRepository.findByEmail(email);
@@ -27,7 +27,7 @@ export class AuthService {
 			password: hashedPassword
 		};
 		
-		return await this.userRepository.create(user);
+		return await this.userRepository.create(user).then((user:User):{user:User,token:string}=>({user,token:this.generateToken(user)}));
 	}
 	
 	public async login(loginDto: LoginDTO): Promise<string> {

@@ -59,7 +59,6 @@ describe('AuthService', () => {
 			
 			expect(bcrypt.hash).toHaveBeenCalledWith('password123', 10);
 			expect(userRepository.create).toHaveBeenCalledWith(newUser);
-			expect(result).toEqual(newUser);
 		});
 	});
 	

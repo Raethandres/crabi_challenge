@@ -1,4 +1,4 @@
-name: Run Tests and Merge to Main
+name: Run Tests on Push to Test Branch
 
 on:
   push:
@@ -19,15 +19,17 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd server
+          npm install
 
-      - name: Run test-create-user
+      - name: Run create-user integration test
         run: npm run test-create-user
 
-      - name: Run test-get-user
+      - name: Run get-user integration test
         run: npm run test-get-user
 
-      - name: Run test-login-user
+      - name: Run login-user integration test
         run: npm run test-login-user
 
       - name: Run unit tests

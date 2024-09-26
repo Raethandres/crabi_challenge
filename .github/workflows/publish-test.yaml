@@ -30,16 +30,24 @@ jobs:
           npm install
 
       - name: Run create-user integration test
-        run: npm run test-create-user
+        run: |
+          cd server
+          npm run test-create-user
 
       - name: Run get-user integration test
-        run: npm run test-get-user
+        run: |
+          cd server
+          npm run test-get-user
 
       - name: Run login-user integration test
-        run: npm run test-login-user
+        run: |
+          cd server
+          npm run test-login-user
 
       - name: Run unit tests
-        run: npm run test
+        run: |
+          cd server
+          npm run test
 
       - name: Merge to main
         if: ${{ success() }}

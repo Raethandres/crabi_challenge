@@ -18,22 +18,22 @@ services:
     depends_on:
       - mongo
       - redis
-      - pld
+#      - pld
     volumes:
       - .:/app/server
     command: [ "node", "dist/index.js" ]
-  pld:
-    build:
-      context: .
-      dockerfile: DockerfilePLD
-    container_name: PLD
-    ports:
-      - "3001:3001"
-    environment:
-      PORT: 3001
-    volumes:
-      - .:/app/pld
-    command: [ "node", "index.js" ]
+#  pld:
+#    build:
+#      context: .
+#      dockerfile: DockerfilePLD
+#    container_name: PLD
+#    ports:
+#      - "3001:3001"
+#    environment:
+#      PORT: 3001
+#    volumes:
+#      - .:/app/pld
+#    command: [ "node", "index.js" ]
 
   mongo:
     image: mongo:4.4

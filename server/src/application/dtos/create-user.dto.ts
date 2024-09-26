@@ -3,7 +3,7 @@ export interface CreateUserDTO {
 	lastName: string;
 	email: string;
 	password: string;
-	dni:string;
+	dni?:string;
 }
 
 export function validateCreateUserDTO(user: CreateUserDTO): CreateUserDTO {
@@ -26,10 +26,6 @@ export function validateCreateUserDTO(user: CreateUserDTO): CreateUserDTO {
 		errors.push('Password is required and must be between 8 and 20 characters.');
 	}
 	
-	const dniRegex = /^[0-9]{8,10}$/;
-	if (!user.dni || !dniRegex.test(user.dni)) {
-		errors.push('DNI is required and must be between 8 and 10 digits.');
-	}
 	if(errors.length>0)
 		throw new Error(errors.join(' '));
 	return user;

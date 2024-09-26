@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Raethandres/crabi_challenge#readme",
   "dependencies": {
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",

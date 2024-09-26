@@ -54,7 +54,7 @@ describe('AuthController',()=>{
 			
 			req.body=mockUser;
 			
-			mockPLDService.get.mockResolvedValueOnce(null); // No hay problemas de PLD
+			mockPLDService.get.mockResolvedValueOnce(null);
 			mockAuthService.register.mockResolvedValueOnce(mockUser);
 			
 			await authController.register(req as Request,res as Response);

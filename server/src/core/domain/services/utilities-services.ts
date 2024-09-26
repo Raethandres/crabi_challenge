@@ -12,7 +12,7 @@ export class UtilitiesService {
 				message: 'token not found',
 				error: 'token not found',
 			});
-			return;  // Detiene la ejecución si no se encuentra el token
+			return;
 		}
 		
 		try {
@@ -27,7 +27,7 @@ export class UtilitiesService {
 				message: error.message,
 				error: error.message,
 			});
-			return;  // Detiene la ejecución si hay un error en la verificación del token
+			return;
 		}
 	}
 }

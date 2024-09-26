@@ -13,7 +13,7 @@ services:
       JWT_SECRET: crabit
       PORT: 3000
       REDIS_URL: redis://redis:6379
-      PLD_HOST: http://98.81.235.22/check-blacklist/
+      PLD_HOST: http://98.81.235.22/
       MONGO_TLS: false
     depends_on:
       - mongo
@@ -44,7 +44,7 @@ services:
       - mongo_data:/data/db
 
   redis:
-    image: redis:alpine # Usamos la imagen de Redis
+    image: redis:alpine
     container_name: redis
     ports:
       - "6379:6379"

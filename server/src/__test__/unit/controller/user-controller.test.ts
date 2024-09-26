@@ -47,7 +47,6 @@ describe('UserController', () => {
 	});
 	
 	it('debería devolver un error si el usuario no existe (404)', async () => {
-		// Simulamos que el servicio lanza un error cuando el usuario no existe
 		const error = new Error('User not found');
 		userService.getUser.mockRejectedValue(error);
 		

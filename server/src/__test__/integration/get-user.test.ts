@@ -20,7 +20,6 @@ describe('GET /api/users/me', () => {
 		await mongoMain.client.close();
 	});
 	
-	// Caso de éxito
 	it('debería devolver la información del usuario 200', async () => {
 		const payload: any = { id: '66f4abfb03c94cf72d1b4933', email: 'testuser@example.com' };
 		const secretKey: string = process.env.JWT_SECRET || 'defaultSecretKey';

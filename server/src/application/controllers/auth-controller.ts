@@ -17,7 +17,7 @@ export class AuthController {
 	public async register(req: Request, res: Response): Promise<Response> {
 		try {
 			const registerUserDto: CreateUserDTO = validateCreateUserDTO(req.body);
-			const pld= await this.pldService.get('search-user',{firstName:registerUserDto.firstName,lastName:registerUserDto.lastName,email:registerUserDto.email});
+			const pld= await this.pldService.get('check-blacklist',{first_name:registerUserDto.firstName,last_name:registerUserDto.lastName,email:registerUserDto.email});
 			if(pld)
 				throw new Error('PLD REPORTED');
 			const data = await this.authService.register(registerUserDto);
